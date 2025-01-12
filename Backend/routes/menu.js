@@ -1,6 +1,6 @@
 // routes/menu.js
 const express = require('express');
-const auth = require('../middleware/auth');
+const auth = require('../Middleware/auth');
 const router = express.Router();
 
 // Protected Route to Get Menu Items
