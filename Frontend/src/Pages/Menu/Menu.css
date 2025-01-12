@@ -1,0 +1,66 @@
+/* src/Pages/Menu/Menu.css */
+
+.menu-container {
+  background-color: white; /* Set the background color to white */
+  padding: 20px; /* Add some padding for better spacing */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+.loading {
+  color: black; /* Change loading text color */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red; /* Change error message text color */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.filter-section {
+  margin-bottom: 20px; /* Add space below filter section */
+}
+
+
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-size: 2rem;
+  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.5); /* Shadow for better visibility */
+  color: #fff; /* Change the header text color to white */
+}
+
+.filter-section {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.text-light {
+  color: #fff; /* Keep this for other elements that need to be white */
+}
+
+.form-select {
+  border: 1px solid #f0f0f0; /* Light border for select elements */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  color: #000; /* Change select options text color to black */
+}
+
+.form-select:focus {
+  border-color: #ff8c00; /* Highlight color on focus */
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(255, 140, 0, 0.5);
+}
+
+.menu-items {
+  margin-top: 20px;
+  color: #000; /* Ensure all menu item text is black */
+}
+
+.loading, .error-message {
+  color: #000; /* Change loading and error text to black */
+  text-align: center;
+  margin-top: 20px;
+}

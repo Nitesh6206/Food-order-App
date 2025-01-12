@@ -1,0 +1,26 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.env
+.env.local
+.env.*.local
+.npmrc
+.yarnrc
+.pnp.*
+.cache
+.eslintcache
+
+# IDEs and editors
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

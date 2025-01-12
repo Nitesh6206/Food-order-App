@@ -1,0 +1,33 @@
+.service-container {
+  background-color: #fff;
+  color: #0000;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.service-item {
+  background-color: #ff8c00; /* Orange background for cards */
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #fff; /* White text color */
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.service-description {
+  color: #fff; /* Ensure description text is white */
+}
+
+.service-icon {
+  color: #fff; /* Ensure icon color is white */
+  font-size: 3rem;
+}

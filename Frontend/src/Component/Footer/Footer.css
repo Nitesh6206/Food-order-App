@@ -1,0 +1,33 @@
+/* Ensure the body takes full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full height */
+}
+
+.content {
+  flex: 1; /* Grow to take remaining space */
+}
+
+footer {
+  padding-top: 1rem; /* Adjust as needed */
+  padding-bottom: 1rem; /* Adjust as needed */
+}
+
+a.text-muted:hover {
+  color: #f39c12 !important; /* Orange hover effect */
+  transition: color 0.3s ease-in-out;
+}
+
+a.text-light:hover {
+  color: #f39c12 !important;
+}
+
+footer .text-orange {
+  color: #f39c12; /* Orange color for important headings */
+}
