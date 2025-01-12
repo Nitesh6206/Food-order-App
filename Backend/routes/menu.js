@@ -1,10 +1,9 @@
 // routes/menu.js
 const express = require('express');
-const auth = require('../middleware/auth');
 const router = express.Router();
 
 // Protected Route to Get Menu Items
-router.get('/', auth, (req, res) => {
+router.get('/', (req, res) => {
     const menu = [
         { id: 1, name: 'Masala Dosa', price: 150, type: 'Veg', meal: 'Breakfast', imageUrl: 'https://via.placeholder.com/150' },
     { id: 2, name: 'Aloo Paratha', price: 120, type: 'Veg', meal: 'Breakfast', imageUrl: 'https://via.placeholder.com/150' },
