@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configure CORS
 const corsOptions = {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000"||"https://food-order-app-o381.vercel.app",
     credentials: true, // Allow cookies and authorization headers
 };
 app.use(cors(corsOptions));
