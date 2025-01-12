@@ -30,6 +30,8 @@ const menuRoutes = require('./routes/menu');
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 
 // Handle unmatched routes
 app.use((req, res, next) => {
