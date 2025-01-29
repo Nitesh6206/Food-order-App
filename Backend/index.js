@@ -1,36 +1,61 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const serverless = require("serverless-http");  // ✅ Required for Vercel
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
 
-dotenv.config();
+dotenv.config(); // Load environment variables
 
 const app = express();
 
+// Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// // Configure CORS
 const corsOptions = {
-  origin: process.env.CLIENT_URL || "https://your-frontend-url.vercel.app",
-  credentials: true,
+    origin:"https://food-order-app-o381.vercel.app" || "http://localhost:3000",
+    credentials: true,
 };
 app.use(cors(corsOptions));
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch((err) => console.error("❌ MongoDB Error:", err));
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch((err) => console.error('MongoDB connection error:', err));
 
-// Routes
-const authRoutes = require("./routes/auth");
-const menuRoutes = require("./routes/menu");
+// Import routes
+const authRoutes = require('./routes/auth');
+const menuRoutes = require('./routes/menu');
 
-app.use("/api/auth", authRoutes);
-app.use("/api/menu", menuRoutes);
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/menu', menuRoutes);
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+app.get('/', (req, res) => res.status(204).end());
 
-module.exports = app;
-module.exports.handler = serverless(app);  // ✅ Vercel needs this
+
+// Handle unmatched routes
+app.use((req, res, next) => {
+    res.status(404).json({ error: 'Route not found' });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something went wrong' });
+});
+
+// Start the server
+const PORT = parseInt(process.env.PORT, 10) || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+// Handle global errors
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (err) => {
+    console.error('Unhandled Rejection:', err);
+});
