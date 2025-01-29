@@ -2,18 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const serverless = require('serverless-http'); // ✅ Required for Vercel
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
 
-// Middleware to parse JSON and URL-encoded data
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// // Configure CORS
 const corsOptions = {
-    origin:"https://food-order-app-o381.vercel.app" || "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "https://food-order-app-o381.vercel.app" || "http://localhost:3000",
     credentials: true,
 };
 app.use(cors(corsOptions));
@@ -27,35 +27,9 @@ mongoose.connect(process.env.MONGO_URI)
 const authRoutes = require('./routes/auth');
 const menuRoutes = require('./routes/menu');
 
-// Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
-app.get('/favicon.ico', (req, res) => res.status(204).end());
-app.get('/', (req, res) => res.status(204).end());
 
-
-// Handle unmatched routes
-app.use((req, res, next) => {
-    res.status(404).json({ error: 'Route not found' });
-});
-
-// Global error handler
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong' });
-});
-
-// Start the server
-const PORT = parseInt(process.env.PORT, 10) || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
-// Handle global errors
-process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
-});
-
-process.on('unhandledRejection', (err) => {
-    console.error('Unhandled Rejection:', err);
-});
+// ✅ Vercel does NOT need `app.listen(PORT)`, instead export the app:
+module.exports = app;
+module.exports.handler = serverless(app);  // ✅ Required for Vercel
