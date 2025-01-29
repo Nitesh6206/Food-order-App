@@ -49,30 +49,26 @@ router.post('/register', async (req, res) => {
 
 // Login Route
 router.post('/login', async (req, res) => {
+    console.log('Login request received:', req.body); // Log the request body
     const { username, password } = req.body;
 
     try {
-        // Find user by username
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
 
-        // Validate password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Wrong password' });
         }
 
-        // Create JWT
         const payload = { userId: user._id };
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.json({ token });
     } catch (err) {
-        console.error(err.message);
+        console.error('Login error:', err.message);
         res.status(500).send('Server error');
     }
 });
-
-module.exports = router;
