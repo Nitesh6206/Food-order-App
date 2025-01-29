@@ -11,12 +11,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configure CORS
-const corsOptions = {
-    origin: process.env.CLIENT_URL ||"https://food-order-app-o381.vercel.app"|| "http://localhost:3000",
-    credentials: true, // Allow cookies and authorization headers
-};
-app.use(cors(corsOptions));
+// // Configure CORS
+// const corsOptions = {
+//     origin: process.env.CLIENT_URL ||"https://food-order-app-o381.vercel.app"|| "http://localhost:3000",
+//     credentials: true, // Allow cookies and authorization headers
+// };
+// app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
