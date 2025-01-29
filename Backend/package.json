@@ -1,17 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Food Order App Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build": "echo 'No build step required for backend'"
-
   },
   "keywords": [],
-  "author": "",
+  "author": "Nitesh Kumar",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
