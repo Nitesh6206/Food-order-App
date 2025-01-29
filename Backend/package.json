@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "run build"
+    "build": "echo 'No build step required for backend'"
+
   },
   "keywords": [],
   "author": "",
