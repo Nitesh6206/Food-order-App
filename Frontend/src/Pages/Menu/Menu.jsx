@@ -46,7 +46,7 @@ const Menu = () => {
           <label htmlFor="mealType" className="text-dark me-2">Filter by Meal Type:</label>
           <select
             id="mealType"
-            className="form-select w-auto"
+            className="form-select w-auto border border-dark"
             value={mealType}
             onChange={(e) => setMealType(e.target.value)}
           >
@@ -60,7 +60,7 @@ const Menu = () => {
           <label htmlFor="foodType" className="text-dark me-2">Filter by Food Type:</label>
           <select
             id="foodType"
-            className="form-select w-auto"
+            className="form-select w-auto border border-dark"
             value={foodType}
             onChange={(e) => setFoodType(e.target.value)}
           >
