@@ -3,59 +3,52 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
 
-// Middleware to parse JSON and URL-encoded data
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// // Configure CORS
-const corsOptions = {
-    origin:"https://food-order-app-o381.vercel.app" || "http://localhost:3000",
-    credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: "https://food-order-app-o381.vercel.app" || "http://localhost:3000",
+    credentials: true
+}));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('MongoDB connected'))
-    .catch((err) => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
-// Import routes
+// Routes
 const authRoutes = require('./routes/auth');
 const menuRoutes = require('./routes/menu');
 
-// Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
+
+// Basic routes
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.get('/', (req, res) => res.status(204).end());
 
-
-// Handle unmatched routes
-app.use((req, res, next) => {
+// 404 handler
+app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 
-// Global error handler
+// Error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something went wrong' });
 });
 
-// Start the server
-const PORT = parseInt(process.env.PORT, 10) || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Start server
+const PORT = process.env.PORT || 5200;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-// Handle global errors
-process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
-});
-
-process.on('unhandledRejection', (err) => {
-    console.error('Unhandled Rejection:', err);
-});
+// Global error handling
+process.on('uncaughtException', err => console.error('Uncaught Exception:', err));
+process.on('unhandledRejection', err => console.error('Unhandled Rejection:', err));
